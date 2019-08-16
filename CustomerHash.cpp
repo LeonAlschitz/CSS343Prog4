@@ -66,7 +66,12 @@ void CustomerHash::addCustomer(Customer *newCustomer)
 {
     CustomerHashNode* temp = &hashTable[CustomerHashGenerator(newCustomer)];
 
-    if(temp->cust != nullptr)
+    if(temp->cust == nullptr) //first item in table
+    {
+        temp->cust = newCustomer;
+        return;
+    }
+    else // collision with open hashing
     {
         while(temp->next != nullptr)
         {
@@ -74,7 +79,10 @@ void CustomerHash::addCustomer(Customer *newCustomer)
         }
     }
 
-    temp->cust = newCustomer;
+    CustomerHashNode* newNode = new CustomerHashNode;
+
+    temp->next = newNode;
+    temp->next->cust = newCustomer;
 
 }
 
@@ -82,26 +90,36 @@ void CustomerHash::loadCustomers(std::ifstream &inFile)
 {
     while (!inFile.eof())
     {
-        Customer newCustomer(inFile);
+        Customer* newCustomer = new Customer();
+        newCustomer->setCustomerInfo(inFile);
+        //Customer newCustomer(inFile);
 
-        CustomerHashNode newNode;
+        if(inFile.eof())
+        {
+            delete newCustomer;
+            newCustomer = nullptr;
+            break;
+        }
 
-        newNode.cust = &newCustomer;
+        addCustomer(newCustomer);
+
+        //delete newCustomer;
+        //newCustomer = nullptr;
     }
 
 }
 
 void CustomerHash::displayCustomers()
 {
+
     for(int i = 0; i < TABLESIZE; i++)
     {
-        if(this->hashTable[i].cust != nullptr)
+        CustomerHashNode* tracer = &this->hashTable[i];
+
+        while((nullptr != tracer) && (nullptr != tracer->cust))
         {
-            do
-            {
-                cout << hashTable[i].cust->getID() << " " << hashTable[i].cust->getLastName() << " " <<  hashTable[i].cust->getFirstName() << endl;
-            }
-            while(this->hashTable[i].next != nullptr);
+            cout <<tracer->cust->getID() << " " << tracer->cust->getLastName() << " " <<  tracer->cust->getFirstName() << endl;
+            tracer = tracer->next;
         }
     }
 }
@@ -123,5 +141,5 @@ CustomerHash::CustomerHashNode::~CustomerHashNode()
 {
     this->cust = nullptr;
     this->next = nullptr;
-    delete this;
+    //delete this;
 }

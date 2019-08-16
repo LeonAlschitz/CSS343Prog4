@@ -13,8 +13,12 @@ Customer::Customer()
     lastName = "";
 }
 
-Customer::Customer(istream &inFile)
+Customer::~Customer()
+{}
+
+void Customer::setCustomerInfo(istream &inFile)
 {
+
     inFile >> customerID; //sets customer ID
 
     if(inFile.eof())
@@ -28,9 +32,6 @@ Customer::Customer(istream &inFile)
     inFile.get();
     inFile >> firstName; //sets first name
 }
-
-Customer::~Customer()
-{}
 
 int Customer::getID() const
 {
@@ -71,5 +72,8 @@ void Customer::storeTransaction(Transaction &trans)
 {
     transHistory.push_back(trans);
 }
+
+
+
 
 

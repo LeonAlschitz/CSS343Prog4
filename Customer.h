@@ -29,7 +29,7 @@ public:
 	//sstream param is parsed to initialize instance data fields.
 	//preconditions: a string with valid data format is passed in.
 	//postconditions: a new instance of customer is created and returned.
-	Customer(istream& inFile);
+    void setCustomerInfo(istream& inFile);
 
 	//destructor.
 	~Customer();
