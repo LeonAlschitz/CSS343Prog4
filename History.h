@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Transaction.h"
-//#include "Rentable.h" //TODO yes
+//#include "Movie.h" //TODO yes
 
 class Customer;//forward reference
 
@@ -39,8 +39,7 @@ public:
     // preconditions: actionType, mediaType, *customerInfo, *itemType, dueDate);
     // postconditions: Returns boolean result for changes
     // --------------------------------------------------
-    virtual bool SetRental(string newMediaType, Rentable *newItemType, Customer * theCustomer, string newDueDatee);
-//TODO calls customer history display
+    virtual bool SetRental(string newMediaType, Movie *newItemType, Customer * theCustomer, string newDueDatee);
 
     // -----------------displayHistory()------------------
     // Description: displays customer class history.

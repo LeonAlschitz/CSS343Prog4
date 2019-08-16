@@ -20,7 +20,7 @@ Return::Return(const Return &newReturn)
 Return::~Return()
 {}
 
-bool Return::SetRental(string newMediaType, Rentable *newItemType, Customer *theCustomer, string newDueDate)
+bool Return::SetRental(string newMediaType, Movie *newItemType, Customer *theCustomer, string newDueDate)
 {
     if (nullptr == newItemType)
     {

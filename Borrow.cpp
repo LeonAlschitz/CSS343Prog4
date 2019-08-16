@@ -20,7 +20,7 @@ Borrow::Borrow(const Borrow &newBorrow)
 Borrow::~Borrow()
 {}
 
-bool Borrow::SetRental(string newMediaType, Rentable *newItemType, Customer *theCustomer, string newDueDate)
+bool Borrow::SetRental(string newMediaType, Movie *newItemType, Customer *theCustomer, string newDueDate)
 {
     if (nullptr == newItemType)
     {

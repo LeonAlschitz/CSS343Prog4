@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include "Transaction.h"
-//#include "Rentable.h"
+//#include "Movie.h"
 //#include "Customer.h" no but call the class //missing a virtual Transaction* create();
 using namespace std;
 
@@ -51,7 +51,7 @@ public:
     // preconditions: preconditions: actionType, mediaType, *customerInfo, *itemType, dueDate);
     // postconditions: Returns boolean result for changes
     // --------------------------------------------------
-    virtual bool SetRental(string newMediaType, Rentable *newItemType, Customer * theCustomer, string newDueDate);
+    virtual bool SetRental(string newMediaType, Movie *newItemType, Customer * theCustomer, string newDueDate);
 
 
     // -----------------display()------------------

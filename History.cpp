@@ -21,7 +21,7 @@ History::History(const History &newHistory)
 History::~History()
 {}
 
-bool History::SetRental(string newMediaType, Rentable *newItemType, Customer *theCustomer, string newDueDatee)
+bool History::SetRental(string newMediaType, Movie *newItemType, Customer *theCustomer, string newDueDatee)
 {
     theCustomer->printHistory();
 

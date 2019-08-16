@@ -13,7 +13,7 @@ Customer::Customer()
     lastName = "";
 }
 
-Customer::Customer(stringstream &inFile)
+Customer::Customer(istream &inFile)
 {
     inFile >> customerID; //sets customer ID
 

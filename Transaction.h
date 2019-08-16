@@ -9,9 +9,9 @@
 // Current derived classes include Borrow, Return, History, and Inventory
 
 
-//#include "Rentable.h"
+//#include "Movie.h"
 //#include "Customer.h"
-class Rentable;
+class Movie;
 class Customer;
 
 #include <iostream>
@@ -71,7 +71,7 @@ public:
     // preconditions: None.
     // postconditions: itemType is returned.
     // --------------------------------------------------
-    Rentable* getItem(); //base class of Movie class
+    Movie* getItem(); //base class of Movie class
 
 
     // -----------------getDueDate()------------------
@@ -85,7 +85,7 @@ public:
     //---------------------setters--------------------
 
 
-    //possibly add cutomer pointer for history class.
+    //TODO: possibly add customer pointer for history class.
 
 
     // -----------------SetRental------------------
@@ -93,7 +93,7 @@ public:
     // preconditions: actionType, mediaType, *customerInfo, *itemType, dueDate);
     // postconditions: Returns boolean result for changes
     // --------------------------------------------------
-    virtual bool SetRental(string newMediaType, Rentable *newItemType, Customer * theCustomer, string newDueDate); //TODO no action type? mediaType, itemType, CustomerInfo  //virtual bool SetRental(string actionType, Customer *customerInfo, string mediaType, Rentable *itemType, string dueDate);
+    virtual bool SetRental(string newMediaType, Movie *newItemType, Customer * theCustomer, string newDueDate); //TODO no action type? mediaType, itemType, CustomerInfo  //virtual bool SetRental(string actionType, Customer *customerInfo, string mediaType, Rentable *itemType, string dueDate);
 
 
     // -----------------display()------------------
@@ -109,7 +109,7 @@ protected:
 
     string mediaType; // the media type i.e. D for DVD
 
-    Rentable* itemType; // Item class is base class of derived Movies class
+    Movie* itemType; // Item class is base class of derived Movies class
 
     string dueDate; //date that rented item is expected to be returned
 };

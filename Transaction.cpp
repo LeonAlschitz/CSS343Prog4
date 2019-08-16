@@ -29,7 +29,7 @@ string Transaction::getMediaType()
     return mediaType;
 }
 
-Rentable* Transaction::getItem()
+Movie* Transaction::getItem()
 {
     return itemType;
 }
@@ -39,7 +39,7 @@ string Transaction::getDueDate()
     return dueDate;
 }
 
-bool Transaction::SetRental(string newMediaType, Rentable *newItemType, Customer * theCustomer, string newDueDate)
+bool Transaction::SetRental(string newMediaType, Movie *newItemType, Customer * theCustomer, string newDueDate)
 {
 
     mediaType = newMediaType;
@@ -51,7 +51,7 @@ bool Transaction::SetRental(string newMediaType, Rentable *newItemType, Customer
 
 void Transaction::display() const
 {
-    cout << "Transaction: " << actionType << ", Media: " << mediaType << "Item: " << itemType;
+    cout << "Transaction: " << actionType << ", Media: " << mediaType << ", Item: " << itemType;
 
     if(!dueDate.empty())
     {
