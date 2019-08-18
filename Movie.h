@@ -28,10 +28,42 @@ public:
 
 
     virtual void updateMovieType(char newMovieType){ movieType = newMovieType;}
-    virtual void updateStock(int newStock){ stock = newStock;}
+    virtual void updateStock(int newStock){ stock += newStock;}
     virtual void setDirectorName(string name){ director = name;}
     virtual void setMovieTitle(string newMovieTitle){ movieTitle = newMovieTitle;}
     virtual void setYearMade(int aYear){yearMade = aYear;}
+
+
+    virtual bool operator<(const Movie &otherMovie) const
+    {
+        if(getFullDirectorName() < otherMovie.getFullDirectorName())
+        {
+            if(getMovieTitle() < otherMovie.getMovieTitle())
+            {
+                if(getYearMade() < otherMovie.getYearMade())
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    virtual bool operator==(const Movie &otherMovie) const
+    {
+        if(getFullDirectorName() == otherMovie.getFullDirectorName())
+        {
+            if(getMovieTitle() == otherMovie.getMovieTitle())
+            {
+                if(getYearMade() == otherMovie.getYearMade())
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 
 private:
