@@ -1,4 +1,4 @@
-// -------------------------------- Business.h ---------------------------------
+// -------------------------------- CustomerHash.h ---------------------------------
 
 // Student: Tim Lawton
 
@@ -7,11 +7,7 @@
 // Date of Last Modification:
 
 // -----------------------------------------------------------------------------
-// Purpose - a brief statement of the program's function
-// This tests the libraryies of Program 3, by running their functions, and using
-// demo input files.
-
-
+// Purpose - hash table and methods for storing the customer data
 // -----------------------------------------------------------------------------
 
 #ifndef TESTDESIGN_CUSTOMERHASH_H
@@ -22,27 +18,34 @@
 
 #include "Customer.h"
 
-#define TABLESIZE 101
+#define TABLESIZE 101  //size of hash table
 
 class CustomerHash
 {
 public:
+
+    // ------------------------------CustomerHash-------------------------------
     // Description: this creates an unfilled CustomerHash
     // preconditions: *this is a totally un-initialized CustomerHash
     // postconditions: The fields of *this will be initialized, and the
     //                 CustomerHash will contain default values for its data
+    // ---------------------------------------------------------------------
     CustomerHash();
 
+    // ------------------------------~CustomerHash-------------------------------
     // Description: destroys and decomposes CustomerHash memory, as-needed
     // preconditions: *this is in any valid state
     // postconditions: all dynamically allocated memory is freed, and the
     //                 CustomerHash is in a deletable state
+    // ---------------------------------------------------------------------
     virtual ~CustomerHash();
 
+    // ------------------------------getCustomer-------------------------------
     // Description: gets the Customer with the customerID key
     // preconditions: *this has already been initialized
     // postconditions: nothing; just grants access to the Customer object
     // @return a pointer to THE Customer object in the CustomerHash table
+    // ---------------------------------------------------------------------
     Customer* getCustomer(int key);
 
     // -----------------------------addCustomer-----------------------------
@@ -53,7 +56,7 @@ public:
     // ---------------------------------------------------------------------
     void addCustomer(Customer* newCustomer);
 
-    // --------------------------displayCustomers---------------------------
+    // --------------------------loadCustomers---------------------------
     // Description: builds up CustomerHash by reading from a data file.
     // preconditions: *this has already been initialized
     // postconditions: The file will have been read, and the CustomerHash

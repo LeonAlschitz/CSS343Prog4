@@ -54,7 +54,7 @@ public:
 
     // --- SetRental(string actionType, Customer *customerInfo, Item *itemType ----
     // Description: changes Transaction private variables.
-    // preconditions: actionType, mediaType, *customerInfo, *itemType
+    // preconditions: mediaType, *customerInfo, *newItemType
     // postconditions: Returns boolean result for changes
     // --------------------------------------------------
     virtual bool SetRental(string &newMediaType, Movie *newItemType, Customer * theCustomer);

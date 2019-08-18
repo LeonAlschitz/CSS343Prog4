@@ -1,6 +1,3 @@
-#ifndef TESTDESIGN_TRANSACTION_H
-#define TESTDESIGN_TRANSACTION_H
-
 // -------------------------------- Transaction.h ---------------------------------
 //
 // Author Name: Tim Lawton
@@ -14,6 +11,10 @@
 //
 // Current derived classes include Borrow, Return, and History
 // -----------------------------------------------------------------------------
+
+
+#ifndef TESTDESIGN_TRANSACTION_H
+#define TESTDESIGN_TRANSACTION_H
 
 //#include "Movie.h"
 #include "Customer.h"

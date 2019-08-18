@@ -1,6 +1,13 @@
+// -------------------------------- Business.cpp ---------------------------------
 //
-// Created by tglaw on 8/18/2019.
+// Author Name: Tim Lawton
 //
+// Creation Date: 07/16/2019
+//
+// Date of Last Modification: 8/19/2019
+//
+// Description: a Business Class header.
+// -----------------------------------------------------------------------------
 
 #include "Business.h"
 

@@ -68,7 +68,7 @@ bool Return::SetRental(string &newMediaType, Movie *newItemType, Customer *theCu
 
     if (mediaType != "")
     {
-        //TODO: Call to increase stock in Rentable class
+        //TODO: Call to increase stock in AVL class
     }
 
     return true;

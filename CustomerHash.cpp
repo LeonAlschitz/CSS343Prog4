@@ -6,6 +6,14 @@
 #include "Customer.h"
 #include <sstream>
 
+
+// ------------------------------CustomerHash-------------------------------
+// Description: this creates an unfilled CustomerHash
+// preconditions: *this is a totally un-initialized CustomerHash
+// postconditions: The fields of *this will be initialized, and the
+//                 CustomerHash will contain default values for its data
+// ---------------------------------------------------------------------
+
 CustomerHash::CustomerHash()
 {
     for(int i = 0; i < TABLESIZE; i++)
@@ -14,6 +22,14 @@ CustomerHash::CustomerHash()
         this->hashTable[i].next = nullptr;
     }
 }
+
+
+// ------------------------------~CustomerHash-------------------------------
+// Description: destroys and decomposes CustomerHash memory, as-needed
+// preconditions: *this is in any valid state
+// postconditions: all dynamically allocated memory is freed, and the
+//                 CustomerHash is in a deletable state
+// ---------------------------------------------------------------------
 
 CustomerHash::~CustomerHash()
 {
@@ -38,6 +54,12 @@ CustomerHash::~CustomerHash()
 }
 
 
+// ------------------------------getCustomer-------------------------------
+// Description: gets the Customer with the customerID key
+// preconditions: *this has already been initialized
+// postconditions: nothing; just grants access to the Customer object
+// @return a pointer to THE Customer object in the CustomerHash table
+// ---------------------------------------------------------------------
 
 Customer *CustomerHash::getCustomer(int key)//KEY == CUSTOMER ID NUMBER
 {
@@ -61,6 +83,12 @@ Customer *CustomerHash::getCustomer(int key)//KEY == CUSTOMER ID NUMBER
 }
 
 
+// -----------------------------addCustomer-----------------------------
+// Description: adds a customer object into the CustomerHash table
+// preconditions: *this has already been initialized
+// postconditions: a pointer to THE Customer object will be stored
+// @param newCustomer is the new Customer
+// ---------------------------------------------------------------------
 
 void CustomerHash::addCustomer(Customer *newCustomer)
 {
@@ -83,8 +111,16 @@ void CustomerHash::addCustomer(Customer *newCustomer)
 
     temp->next = newNode;
     temp->next->cust = newCustomer;
-
 }
+
+
+// --------------------------loadCustomers---------------------------
+// Description: builds up CustomerHash by reading from a data file.
+// preconditions: *this has already been initialized
+// postconditions: The file will have been read, and the CustomerHash
+//                 built in memory
+//@param input is the ifstream object of the file
+// ---------------------------------------------------------------------
 
 void CustomerHash::loadCustomers(std::ifstream &inFile)
 {
@@ -106,8 +142,14 @@ void CustomerHash::loadCustomers(std::ifstream &inFile)
         //delete newCustomer;
         //newCustomer = nullptr;
     }
-
 }
+
+
+// --------------------------displayCustomers---------------------------
+// Description: uses couts to display the Customers
+// preconditions: *this has already been initialized, & has valid state
+// postconditions: data of the CustomerHash will have been put to cout
+// ---------------------------------------------------------------------
 
 void CustomerHash::displayCustomers()
 {
@@ -124,6 +166,16 @@ void CustomerHash::displayCustomers()
     }
 }
 
+
+// ------------------------CustomerHashGenerator------------------------
+// Description: generate CustomerHash value to use as a storage address
+// preconditions: *this is initialized, & Customer* is valid
+// postconditions: nothing is changed
+// @param CustomerHashCust is the Customer to generate has for
+// @return int of CustomerHash address to store at in the CustomerHash
+//             table array hashTable
+// ---------------------------------------------------------------------
+
 int CustomerHash::CustomerHashGenerator(const Customer *CustomerHashCust) const
 {
     int newCustomerHash = (CustomerHashCust->getID() % TABLESIZE);
@@ -131,11 +183,29 @@ int CustomerHash::CustomerHashGenerator(const Customer *CustomerHashCust) const
     return newCustomerHash;
 }
 
+
+// -----------------------CustomerHashNode--------------------------
+// Description: constructor, so the heap can mange these
+// preconditions: *this is a totally un-initialized CustomerHashNode
+// postconditions: The fields of *this will be initialized, and
+//                 will contain:
+//                 * cust = nullptr
+//                 * next = nullptr
+// -----------------------------------------------------------------
+
 CustomerHash::CustomerHashNode::CustomerHashNode()
 {
     this->cust = nullptr;
     this->next = nullptr;
 }
+
+
+// -----------------------~CustomerHashNode-------------------------
+// Description: destructor, so the heap can mange these
+// preconditions: *this is a CustomerHashNode of any valid state
+// postconditions: all dynamically allocated memory is freed, and
+//                 the CustomerHashNode is in a deletable state
+// -----------------------------------------------------------------
 
 CustomerHash::CustomerHashNode::~CustomerHashNode()
 {

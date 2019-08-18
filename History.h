@@ -31,29 +31,36 @@ public:
 
     friend class Customer;
 
-    //constructors
+    // -----------------History()------------------
+    // Description: this is the default constructor.
+    // preconditions: None.
+    // postconditions: a History copy values are constructed
+    // --------------------------------------------------
     History();
-    History(const History& newHistory); //overloaded constructor
 
-    //deconstructor
+    // -------------History()--------
+    // Description: this is the overloaded constructor.
+    // preconditions: History to set values to.
+    // postconditions: a History is constructed.
+    // ------------------------------------------------
+    History(const History& newHistory);
+
+    // -----------------~History------------------
+    // Description: this is the deconstructor.
+    // preconditions: None.
+    // postconditions: a History is deconstructed
+    // --------------------------------------------------
     virtual ~History() override;
 
     //setter
 
     // -SetRental(string actionType, Customer *customerInfo, Item *itemType)-
-    // Description: changes Transaction private variables.
+    // Description: displays customer class history. // setter name for overridden commands
     // preconditions: actionType, mediaType, *customerInfo, *itemType);
     // postconditions: Returns boolean result for changes
+    // calls to customer class to print out history vector
     // --------------------------------------------------
     virtual bool SetRental(string &newMediaType, Movie *newItemType, Customer * theCustomer);
-
-    // -----------------displayHistory()------------------
-    // Description: displays customer class history.
-    // preconditions: None.
-    // postconditions: customer history is displayed.
-    // --------------------------------------------------
-   // void displayHistory(); //call to Customer class to display history vector
-
 };
 
 

@@ -1,7 +1,4 @@
-#ifndef TESTDESIGN_BORROW_H
-#define TESTDESIGN_BORROW_H
-
-// -------------------------------- Borrow.cpp ---------------------------------
+// -------------------------------- Borrow.h ---------------------------------
 //
 // Author Name: Tim Lawton
 //
@@ -14,6 +11,10 @@
 //
 // when Borrow class is called, if Item is in stock, stock = (stock - 1)
 // -----------------------------------------------------------------------------
+
+#ifndef TESTDESIGN_BORROW_H
+#define TESTDESIGN_BORROW_H
+
 
 #include <iostream>
 #include "Transaction.h"
@@ -37,10 +38,10 @@ public:
 
     // -------------Borrow()--------
     // Description: this is the overloaded constructor.
-    // preconditions: Transaction to set values to.
-    // postconditions: a transaction is constructed.
-    // ---------------------------------------------------------------------
-    Borrow(const Borrow &newBorrow); //overloaded constructor
+    // preconditions: Borrow to set values to.
+    // postconditions: a Borrow is constructed.
+    // ---------------------------------------------
+    Borrow(const Borrow &newBorrow);
 
 
     // -----------------~Borrow------------------
@@ -53,7 +54,7 @@ public:
 
     //------------setter-------------//
 
-    // ---SetRental(string actionType, Customer *customerInfo, Item *itemType--
+    // ---SetRental(string actionType, Customer *customerInfo, Item *itemType)--
     // Description: changes Transaction private variables.
     // preconditions: preconditions: actionType, mediaType, *customerInfo, *itemType
     // postconditions: Returns boolean result for changes
