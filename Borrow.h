@@ -18,7 +18,7 @@
 
 #include <iostream>
 #include "Transaction.h"
-//#include "Movie.h"
+class Movie; //#include "Movie.h"
 //#include "Customer.h" no but call the class //missing a virtual Transaction* create();
 using namespace std;
 

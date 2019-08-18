@@ -10,6 +10,10 @@
 // -----------------------------------------------------------------------------
 
 #include "Business.h"
+#include "Borrow.h"
+#include "Return.h"
+#include "History.h"
+
 
 Business::Business()
 {
@@ -31,10 +35,87 @@ void Business::loadMovies(std::ifstream &movieFile)
     //call load movies in movie class
 }
 
+//***********************************************************************
+//Possibly remove comQueue as it seems un-needed and directly run commands
+
 void Business::loadCommands(std::ifstream &comFile)
 {
-    //pull in from file load into comQueue
+    char commandType;
+    string newMedia;
+    Movie* newMovie = nullptr;
+    Customer* newCustomer;
+
+    while (!comFile.eof())
+    {
+        comFile >> commandType;
+
+        switch (commandType)
+        {
+            case 'B': // Borrow Movie
+            {
+                //TODO: error checking
+
+                Borrow* newBorrow = new Borrow;
+                newBorrow->SetRental(newMedia, newMovie, newCustomer);
+
+                comQueue.push(*newBorrow);
+
+                // TODO: newMovie->updateStock(1);
+
+                break;
+            }
+
+            case 'R': // Return Movie
+            {
+                //TODO: error checking
+
+                Return *newReturn = new Return;
+                newReturn->SetRental(newMedia, newMovie, newCustomer);
+
+                comQueue.push(*newReturn);
+
+                // TODO: newMovie->updateStock(-1);
+
+                break;
+            }
+
+            case 'H': // Print customer history
+            {
+                //TODO: error checking
+
+                History *newHistory = new History;
+                newHistory->SetRental(newMedia, newMovie, newCustomer);
+
+                comQueue.push(*newHistory);
+
+                break;
+            }
+
+            case 'I':  // Print inventory
+            {
+                //TODO: call AVLTree printInventory();
+
+
+                break;
+            }
+
+            default: // Invalid command
+            {
+                cout << endl << "**********************************" << endl << endl;
+
+                cout << "Error: Transaction command invalid: " << commandType << endl;
+
+                cout << endl << "**********************************" << endl << endl;
+
+                break;
+            }
+        }
+
+    }
 }
+
+
+
 
 void Business::runCommands()
 {

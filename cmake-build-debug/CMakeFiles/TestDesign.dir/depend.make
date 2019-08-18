@@ -6,10 +6,13 @@ CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Borrow.h
 CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Customer.h
 CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Transaction.h
 
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../Borrow.h
 CMakeFiles/TestDesign.dir/Business.cpp.o: ../Business.cpp
 CMakeFiles/TestDesign.dir/Business.cpp.o: ../Business.h
 CMakeFiles/TestDesign.dir/Business.cpp.o: ../Customer.h
 CMakeFiles/TestDesign.dir/Business.cpp.o: ../CustomerHash.h
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../History.h
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../Return.h
 CMakeFiles/TestDesign.dir/Business.cpp.o: ../Transaction.h
 
 CMakeFiles/TestDesign.dir/Customer.cpp.o: ../Customer.cpp

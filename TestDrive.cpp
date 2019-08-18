@@ -10,6 +10,10 @@ using namespace std;
 
 class Movie
 {
+    int stock = 0;
+
+    virtual void updateStock(int newStock){ stock += newStock;}
+
 
 };
 
@@ -34,20 +38,13 @@ int main()
 
     History testH;
 
+    Movie newMovie;
 
     // ************TRANSACTION TESTS**************
 
 
 
-    cout << "********END OF TEST HARNESS********" << endl;
-
-
-
-
-
-
-
-
+    cout << endl << "********END OF TEST HARNESS********" << endl;
 
     return 0;
 }
