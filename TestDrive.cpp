@@ -32,6 +32,13 @@ int main()
 
     testHash.displayCustomers();
 
+    History testH;
+
+
+    // ************TRANSACTION TESTS**************
+
+
+
     cout << "********END OF TEST HARNESS********" << endl;
 
 

@@ -3,7 +3,14 @@
 
 CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Borrow.cpp
 CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Borrow.h
+CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Customer.h
 CMakeFiles/TestDesign.dir/Borrow.cpp.o: ../Transaction.h
+
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../Business.cpp
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../Business.h
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../Customer.h
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../CustomerHash.h
+CMakeFiles/TestDesign.dir/Business.cpp.o: ../Transaction.h
 
 CMakeFiles/TestDesign.dir/Customer.cpp.o: ../Customer.cpp
 CMakeFiles/TestDesign.dir/Customer.cpp.o: ../Customer.h
@@ -19,6 +26,7 @@ CMakeFiles/TestDesign.dir/History.cpp.o: ../History.cpp
 CMakeFiles/TestDesign.dir/History.cpp.o: ../History.h
 CMakeFiles/TestDesign.dir/History.cpp.o: ../Transaction.h
 
+CMakeFiles/TestDesign.dir/Return.cpp.o: ../Customer.h
 CMakeFiles/TestDesign.dir/Return.cpp.o: ../Return.cpp
 CMakeFiles/TestDesign.dir/Return.cpp.o: ../Return.h
 CMakeFiles/TestDesign.dir/Return.cpp.o: ../Transaction.h
@@ -31,6 +39,7 @@ CMakeFiles/TestDesign.dir/TestDrive.cpp.o: ../Return.h
 CMakeFiles/TestDesign.dir/TestDrive.cpp.o: ../TestDrive.cpp
 CMakeFiles/TestDesign.dir/TestDrive.cpp.o: ../Transaction.h
 
+CMakeFiles/TestDesign.dir/Transaction.cpp.o: ../Customer.h
 CMakeFiles/TestDesign.dir/Transaction.cpp.o: ../Transaction.cpp
 CMakeFiles/TestDesign.dir/Transaction.cpp.o: ../Transaction.h
 

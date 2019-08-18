@@ -86,6 +86,12 @@
 		<Unit filename="/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Borrow.h">
 			<Option target="TestDesign"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Business.cpp">
+			<Option target="TestDesign"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Business.h">
+			<Option target="TestDesign"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Customer.cpp">
 			<Option target="TestDesign"/>
 		</Unit>

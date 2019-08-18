@@ -10,6 +10,8 @@
 #include "Transaction.h"
 using namespace std;
 
+class Transaction; //forward reference
+
 /*
 PURPOSE:
 This file is the interface for the Customer class. Each object of this class

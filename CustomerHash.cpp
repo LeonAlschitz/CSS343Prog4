@@ -37,9 +37,9 @@ CustomerHash::~CustomerHash()
     }
 }
 
-/////     KEY == CUSTOMER ID NUMBER
 
-Customer *CustomerHash::getCustomer(int key)//TODO parameter incomplete for linked list verification
+
+Customer *CustomerHash::getCustomer(int key)//KEY == CUSTOMER ID NUMBER
 {
     int index = (key % TABLESIZE);
 

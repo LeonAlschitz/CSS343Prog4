@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/TestDesign.dir/History.cpp.o"
   "CMakeFiles/TestDesign.dir/Customer.cpp.o"
   "CMakeFiles/TestDesign.dir/CustomerHash.cpp.o"
+  "CMakeFiles/TestDesign.dir/Business.cpp.o"
   "TestDesign.pdb"
   "TestDesign.exe"
   "libTestDesign.dll.a"

@@ -1,6 +1,18 @@
-//
-// Created by tglaw on 8/15/2019.
-//
+// -------------------------------- Business.h ---------------------------------
+
+// Student: Tim Lawton
+
+// Creation Date: 07/16/2019
+
+// Date of Last Modification:
+
+// -----------------------------------------------------------------------------
+// Purpose - a brief statement of the program's function
+// This tests the libraryies of Program 3, by running their functions, and using
+// demo input files.
+
+
+// -----------------------------------------------------------------------------
 
 #ifndef TESTDESIGN_CUSTOMERHASH_H
 #define TESTDESIGN_CUSTOMERHASH_H
@@ -49,8 +61,6 @@ public:
     //@param input is the ifstream object of the file
     // ---------------------------------------------------------------------
     void loadCustomers(std::ifstream&);
-    // psuedo-code:
-    // builds the customers line by line.
 
     // --------------------------displayCustomers---------------------------
     // Description: uses couts to display the Customers

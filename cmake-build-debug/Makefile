@@ -150,6 +150,33 @@ Borrow.cpp.s:
 	$(MAKE) -f CMakeFiles/TestDesign.dir/build.make CMakeFiles/TestDesign.dir/Borrow.cpp.s
 .PHONY : Borrow.cpp.s
 
+Business.o: Business.cpp.o
+
+.PHONY : Business.o
+
+# target to build an object file
+Business.cpp.o:
+	$(MAKE) -f CMakeFiles/TestDesign.dir/build.make CMakeFiles/TestDesign.dir/Business.cpp.o
+.PHONY : Business.cpp.o
+
+Business.i: Business.cpp.i
+
+.PHONY : Business.i
+
+# target to preprocess a source file
+Business.cpp.i:
+	$(MAKE) -f CMakeFiles/TestDesign.dir/build.make CMakeFiles/TestDesign.dir/Business.cpp.i
+.PHONY : Business.cpp.i
+
+Business.s: Business.cpp.s
+
+.PHONY : Business.s
+
+# target to generate assembly for a file
+Business.cpp.s:
+	$(MAKE) -f CMakeFiles/TestDesign.dir/build.make CMakeFiles/TestDesign.dir/Business.cpp.s
+.PHONY : Business.cpp.s
+
 Customer.o: Customer.cpp.o
 
 .PHONY : Customer.o
@@ -324,6 +351,9 @@ help:
 	@echo "... Borrow.o"
 	@echo "... Borrow.i"
 	@echo "... Borrow.s"
+	@echo "... Business.o"
+	@echo "... Business.i"
+	@echo "... Business.s"
 	@echo "... Customer.o"
 	@echo "... Customer.i"
 	@echo "... Customer.s"

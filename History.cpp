@@ -15,13 +15,12 @@ History::History(const History &newHistory)
     actionType = newHistory.actionType;
     mediaType = newHistory.mediaType;
     itemType = newHistory.itemType;
-    dueDate = newHistory.dueDate;
 }
 
 History::~History()
 {}
 
-bool History::SetRental(string newMediaType, Movie *newItemType, Customer *theCustomer, string newDueDatee)
+bool History::SetRental(string &newMediaType, Movie *newItemType, Customer *theCustomer)
 {
     theCustomer->printHistory();
 
