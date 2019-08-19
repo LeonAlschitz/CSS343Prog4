@@ -57,13 +57,13 @@ public:
         return movieType + ", " + to_string(getStock()) + ", " + getFullDirectorName() + ", " + getMovieTitle() + ", " + majorActorAndDate + "\n";
     }
 
-    virtual bool operator<(const Classic &otherClassic) const
+    virtual bool compareSize(const Classic *otherClassic) const
     {
-        if(getFullDirectorName() < otherClassic.getFullDirectorName())
+        if(getFullDirectorName() < otherClassic->getFullDirectorName())
         {
-            if(getMovieTitle() < otherClassic.getMovieTitle())
+            if(getMovieTitle() < otherClassic->getMovieTitle())
             {
-                if(getMajorActorAndDate() < otherClassic.getMajorActorAndDate())return true;
+                if(getMajorActorAndDate() < otherClassic->getMajorActorAndDate())return true;
             }
         }
         return false;
@@ -79,6 +79,12 @@ public:
             }
         }
         return false;
+    }
+
+    virtual bool operator<(const Movie &aNode) const
+    {
+        const Classic *derived = dynamic_cast<const Classic*>(&aNode);
+        return compareSize(derived);
     }
 
     virtual bool operator==(const Movie &aNode) const

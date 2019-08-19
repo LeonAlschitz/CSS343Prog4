@@ -357,7 +357,13 @@ class AVLTree
 	//Description: Rempoves all of the nodes from the AVLTree
 	//Preconditions: There is at least one node, in the AVLTree.
 	//Postconditions: There are no more nodes in the AVLTree, and the head is pointing to NULL
-	bool clearTree();
+	void clearTree()
+    {
+        cout << "Clearing out the inventory...." << endl;
+	    delete(head);
+	    head = NULL;
+	    cout << "Done! :D" << endl;
+    }
 
 
 	//Description: This will reduce the stock of a Node by a given amount
@@ -394,13 +400,15 @@ class AVLTree
 	//Postconditions: The whole inventory is print in order of genre, and is sorted according to each genres internal order.
 	void printInventory()
 	{
+		cout << "Attempting to print out the inventory" << endl;
 		if(head == NULL)
 		{
-			cout << "you have no data in your inventory" << endl;
+			cout << "You have no data in your inventory!" << endl;
 			return;
 		}
 		cout << "-----------------------------------" << endl;
 		cout << "Printing out the full inventory...." << endl;
+		cout << "root = the head, 0 = left child, 1 = right child" << endl;
 		printInventory(head, "root ");
 		cout << "-----------------------------------" << endl;
 	}

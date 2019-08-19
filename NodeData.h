@@ -40,7 +40,15 @@ class NodeData {
 	//Description: This destroys this NodeData object
 	//Preconditions: This object is initialized
 	//Postconditions: This Object is destroyed
-	~NodeData(){delete(aMovie);}
+	~NodeData()
+	{
+        delete(left);
+        left = NULL;
+        delete(right);
+        right = NULL;
+        delete(aMovie);
+        aMovie = NULL;
+	}
 
 	//Description: This creates a new Movie Object using the string, and sets it to the movieData
 	//Preconditions: This Object is initialized
