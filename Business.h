@@ -18,7 +18,8 @@
 #include <queue>
 
 #include "CustomerHash.h"
-//#include "Movie.h"
+#include "Movie.h"
+#include "AVLTree.h"
 #include "Transaction.h"
 
 class Business
@@ -82,12 +83,15 @@ public:
     // ---------------------------------------------------------------------
     void displayBusiness();
 
+    void printMenu();
+
+    AVLTree* getTree(){return tree;}
 protected:
 
 private:
     queue<Transaction> comQueue;
     CustomerHash       custTable;  //CustomerHash table of the customers
-    //Movie              movieDB;
+    AVLTree *tree = NULL;
 };
 
 

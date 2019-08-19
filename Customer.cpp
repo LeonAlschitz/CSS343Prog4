@@ -145,6 +145,38 @@ void Customer::storeTransaction(Transaction &trans)
 }
 
 
+// ------------------------------addToCustomerInventory-------------------------------
+// Description: Adds movie to customer's current inventory.
+//preconditions: the movie being added
+//postconditions: customer inventory vector updated
+// ---------------------------------------------------------------------
+
+void Customer::addToCustomerInventory(Movie *theMovie)
+{
+    currentCheckOut.push_back(*theMovie);
+}
 
 
+// ------------------------------removeFromCustomerInventory-------------------------------
+// Description: removes movie from customer's current inventory.
+//preconditions: the movie being removed
+//postconditions: customer inventory vector updated
+// ---------------------------------------------------------------------
 
+bool Customer::removeFromCustomerInventory(Movie *theMovie)
+{
+    if(currentCheckOut.size() > 0)
+    {
+        for (unsigned int i = 0; i < currentCheckOut.size(); i++)
+        {
+            if(currentCheckOut[i] == *theMovie)
+            {
+                currentCheckOut.erase(currentCheckOut.begin() + i);
+                return true;
+            }
+        }
+    }
+
+    cout << "Customer Does not have the Item" << endl;
+    return false;
+}

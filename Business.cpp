@@ -8,22 +8,91 @@
 //
 // Description: a Business Class header.
 // -----------------------------------------------------------------------------
-
+#include <iostream>
+#include <fstream>
+#include <queue>
 #include "Business.h"
 #include "Borrow.h"
 #include "Return.h"
 #include "History.h"
 #include "CustomerHash.h"
+#include "Movie.h"
+#include "AVLTree.h"
+#include "Transaction.h"
 
 
 Business::Business()
 {
-
+    tree = new AVLTree();
 }
 
 Business::~Business()
 {
+    delete(tree);
+}
 
+int main()
+{
+    Business *movieStore = new Business();
+    cout << "Welcome user to Tim and Leon Program 4!" << endl;
+    bool exitUserMenu = false;
+    string userInput = "";
+
+    movieStore->printMenu();
+    while(!exitUserMenu)
+    {
+        userInput = "";
+        cout << "----------------------------" << endl;
+        cout << "Please enter a new command: ";
+        getline(cin, userInput);
+
+        if(userInput == "quit")
+        {
+            exitUserMenu = true;
+        }
+        else if(userInput == "menu")movieStore->printMenu();
+        else if(userInput == "default")
+        {
+            ifstream movieFile("C:\\Users\\Leon\\Desktop\\CSS343Prog4\\data4Movies.txt");
+            movieStore->loadMovies(movieFile);
+            movieFile.close();
+            movieStore->getTree()->printInventory();
+
+            ifstream customerFile("C:\\Users\\Leon\\Desktop\\CSS343Prog4\\data4customers.txt");
+            movieStore->loadCustomers(customerFile);
+            customerFile.close();
+
+            ifstream actionFile("C:\\Users\\Leon\\Desktop\\CSS343Prog4\\data4commands.txt");
+            movieStore->loadCommands(actionFile);
+            movieFile.close();
+
+        }
+        else if(userInput == "custom")
+        {
+
+        }
+        else cout << "That input was invalid." << endl;
+
+
+    }
+
+
+
+
+
+    cout << "Goodbye! Thank you for running Tim and Leon's Program 4!" << endl;
+    cout << "----------------------------" << endl;
+
+    return 0;
+}
+
+void Business::printMenu()
+{
+    cout << "List of valid commands:" << endl;
+    cout << "quit, to quit the program" << endl;
+    cout << "menu, to re-print the menu" << endl;
+    cout << "default, to take as input the starting homework txt's: data4commands.txt, data4customers.txt, data4movies.txt" << endl;
+    cout << "custom, to enter custom inputs" << endl;
 }
 
 void Business::loadCustomers(std::ifstream &custFile)
@@ -33,7 +102,15 @@ void Business::loadCustomers(std::ifstream &custFile)
 
 void Business::loadMovies(std::ifstream &movieFile)
 {
-    //call load movies in movie class
+    string input = "";
+    while(!movieFile.eof())
+    {
+        getline(movieFile, input);
+        if(input.length() < 2)return;
+
+        tree->insertNode(input);
+        input = "";
+    }
 }
 
 //***********************************************************************
@@ -43,6 +120,7 @@ void Business::loadCommands(std::ifstream &comFile)
 {
     char commandType;
     string newMedia;
+    string movieData;// for searching the AVL tree
     Movie* newMovie = nullptr;
     Customer* newCustomer;
     int customerID;
@@ -63,8 +141,9 @@ void Business::loadCommands(std::ifstream &comFile)
                 comFile >> customerID;
                 newCustomer = custTable.getCustomer(customerID);
 
-                if(nullptr == newCustomer) //no customer, prints its own error
+                if(nullptr == newCustomer) //no customer
                 {
+                    cout << endl << "There is no customer by the ID number: " << customerID <<endl << endl;
                     break;
                 }
 
@@ -81,18 +160,35 @@ void Business::loadCommands(std::ifstream &comFile)
                           offer different movie
                       else
                           error message
-                 else
-                    run code below
+
+                          *** implementation below   ***
+
                 */
 
+                //possibly have a findMovie() method to search in your AVL tree
+                //TODO: SET newMovie to AVLcomfile.get()     see bellow
 
-                //TODO: SET newMovie to AVLcomfile.get()
+                getline(comFile, movieData); ////TODO verify no errors in second run of Borrow
+                tree->getMovie(movieData);
+
+
+
+
+
+                if(newMovie->getStock() < 1) //TODO ERROR: SEGSEGV (segmentation fault) without newMovie assignment
+                {
+                    break; //TODO: print error message or offer alternate
+                }
+
 
                 Borrow* newBorrow = new Borrow;
 
                 if(newBorrow->SetRental(newMedia, newMovie, newCustomer))
                 {
-                    // TODO: newMovie->updateStock(1);
+                    newCustomer->storeTransaction(*newBorrow);
+                    newCustomer->addToCustomerInventory(newMovie);
+
+                    newMovie->updateStock(-1);
                 }
 
                 break;
@@ -100,14 +196,57 @@ void Business::loadCommands(std::ifstream &comFile)
 
             case 'R': // Return Movie
             {
-                //TODO: error checking
+                //   TODO: error checking
 
-                Return *newReturn = new Return;
-                newReturn->SetRental(newMedia, newMovie, newCustomer);
 
-                comQueue.push(*newReturn);
+                comFile.get();
 
-                // TODO: newMovie->updateStock(-1);
+                comFile >> customerID;
+                newCustomer = custTable.getCustomer(customerID);
+
+                if(nullptr == newCustomer) //no customer
+                {
+                    cout << endl << "There is no customer by the ID number: " << customerID <<endl << endl;
+                    break;
+                }
+
+                /*
+
+                if customer has item
+                     add Return to customer vector
+                    increase stock AVL by 1
+
+                else
+                          error message
+
+                          *** implementation below   ***
+
+                */
+
+
+                //TODO: SET newMovie to AVLcomfile.get()
+
+                getline(comFile, movieData); ////TODO verify no errors in second run of Borrow
+                tree->getMovie(movieData);
+
+
+                if(newMovie->getStock() < 1) //TODO ERROR: SEGSEGV (segmentation fault) without newMovie assignment
+                {
+                    break; //TODO: print error message or offer alternate
+                }
+
+                if(newCustomer->removeFromCustomerInventory(newMovie))
+                {
+                    Return* newReturn = new Return;
+
+                    if(newReturn->SetRental(newMedia, newMovie, newCustomer))
+                    {
+                        newCustomer->storeTransaction(*newReturn);
+                        newCustomer->addToCustomerInventory(newMovie);
+
+                        newMovie->updateStock(1);
+                    }
+                }
 
                 break;
             }
@@ -121,21 +260,20 @@ void Business::loadCommands(std::ifstream &comFile)
                 comFile >> customerID;
                 newCustomer = custTable.getCustomer(customerID);
 
-                if(nullptr == newCustomer) //no customer, prints its own error
+                if(nullptr == newCustomer) //no customer
                 {
+                    cout << endl << "There is no customer by the ID number: " << customerID <<endl << endl;
                     break;
                 }
 
-                newHistory->SetRental(newMedia, newMovie, newCustomer);
+                newHistory->SetRental(newMedia, newMovie, newCustomer); //prints customer history
 
                 break;
             }
 
             case 'I':  // Print inventory
             {
-                //TODO: call AVLTree printInventory();
-
-
+                tree->printInventory();
                 break;
             }
 
@@ -152,51 +290,6 @@ void Business::loadCommands(std::ifstream &comFile)
         }
 
     }
-}
-
-
-
-
-void Business::runCommands()
-{
-    //pop from comQueue and run each through switch statement
-
-    /*
-
-
-
-
-
-     case 'R'
-
-        if customer exists
-            if customer has item?
-              add return to customer history vector
-              increase AVL stock by 1
-
-          else
-              display error message
-
-
-     case 'H'
-
-        if customer exists    <--- displays its own error message getCustomer()
-            display history
-
-
-
-
-
-     case 'I'
-        display current inventory
-
-
-
-     case 'default'
-
-        display error message: transaction command does not exist
-
-*/
 }
 
 void Business::displayBusiness()
