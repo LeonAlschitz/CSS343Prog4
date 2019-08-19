@@ -25,6 +25,9 @@
 #include<vector>
 #include<sstream>
 #include "Transaction.h"
+#include "Movie.h"
+#include "AVLTree.h"
+
 using namespace std;
 
 class Transaction; //forward reference
@@ -92,12 +95,28 @@ public:
 	// ---------------------------------------------------------------------
 	void storeTransaction(Transaction& trans); // const);
 
+	// ------------------------------addToCustomerInventory-------------------------------
+	// Description: Adds movie to customer's current inventory.
+	//preconditions: the movie being added
+	//postconditions: customer inventory vector updated
+	// ---------------------------------------------------------------------
+	void addToCustomerInventory(Movie *theMovie);
+
+	// ------------------------------removeFromCustomerInventory-------------------------------
+	// Description: removes movie from customer's current inventory.
+	//preconditions: the movie being removed
+	//postconditions: customer inventory vector updated
+	// ---------------------------------------------------------------------
+	bool removeFromCustomerInventory(Movie *theMovie);
+
+
 private:
 
 	int customerID;						//customer's ID.
 	string firstName;					//customer's first name.
 	string lastName;					//customer's last name.
 	vector<Transaction> transHistory;	//vector to store this customer's transaction history.
+	vector<Movie> currentCheckOut;		//vector of currently checked out movies.
 };
 
 #endif //IMPLEMENTATION_CUSTOMER_H

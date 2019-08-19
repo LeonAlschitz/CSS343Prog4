@@ -131,8 +131,9 @@ void Business::loadCommands(std::ifstream &comFile)
                 comFile >> customerID;
                 newCustomer = custTable.getCustomer(customerID);
 
-                if(nullptr == newCustomer) //no customer, prints its own error
+                if(nullptr == newCustomer) //no customer
                 {
+                    cout << endl << "There is no customer by the ID number: " << customerID <<endl << endl;
                     break;
                 }
 
@@ -149,18 +150,28 @@ void Business::loadCommands(std::ifstream &comFile)
                           offer different movie
                       else
                           error message
-                 else
-                    run code below
+
+                          *** implementation below   ***
+
                 */
 
 
                 //TODO: SET newMovie to AVLcomfile.get()
 
+                if(newMovie->getStock()< 1)
+                {
+                    break; //TODO: print error message or offer alternate
+                }
+
+
                 Borrow* newBorrow = new Borrow;
 
                 if(newBorrow->SetRental(newMedia, newMovie, newCustomer))
                 {
-                    // TODO: newMovie->updateStock(1);
+                    newCustomer->storeTransaction(*newBorrow);
+                    newCustomer->addToCustomerInventory(newMovie);
+
+                    newMovie->updateStock(-1);
                 }
 
                 break;
@@ -168,14 +179,48 @@ void Business::loadCommands(std::ifstream &comFile)
 
             case 'R': // Return Movie
             {
-                //TODO: error checking
+                //   TODO: error checking
 
-                Return *newReturn = new Return;
-                newReturn->SetRental(newMedia, newMovie, newCustomer);
 
-                comQueue.push(*newReturn);
+                comFile.get();
 
-                // TODO: newMovie->updateStock(-1);
+                comFile >> customerID;
+                newCustomer = custTable.getCustomer(customerID);
+
+                if(nullptr == newCustomer) //no customer
+                {
+                    cout << endl << "There is no customer by the ID number: " << customerID <<endl << endl;
+                    break;
+                }
+
+                /*
+
+                if customer has item
+                     add Return to customer vector
+                    increase stock AVL by 1
+
+                else
+                          error message
+
+                          *** implementation below   ***
+
+                */
+
+
+                //TODO: SET newMovie to AVLcomfile.get()
+
+                if(newCustomer->removeFromCustomerInventory(newMovie))
+                {
+                    Return* newReturn = new Return;
+
+                    if(newReturn->SetRental(newMedia, newMovie, newCustomer))
+                    {
+                        newCustomer->storeTransaction(*newReturn);
+                        newCustomer->addToCustomerInventory(newMovie);
+
+                        newMovie->updateStock(1);
+                    }
+                }
 
                 break;
             }
@@ -189,12 +234,13 @@ void Business::loadCommands(std::ifstream &comFile)
                 comFile >> customerID;
                 newCustomer = custTable.getCustomer(customerID);
 
-                if(nullptr == newCustomer) //no customer, prints its own error
+                if(nullptr == newCustomer) //no customer
                 {
+                    cout << endl << "There is no customer by the ID number: " << customerID <<endl << endl;
                     break;
                 }
 
-                newHistory->SetRental(newMedia, newMovie, newCustomer);
+                newHistory->SetRental(newMedia, newMovie, newCustomer); //prints customer history
 
                 break;
             }
@@ -202,7 +248,6 @@ void Business::loadCommands(std::ifstream &comFile)
             case 'I':  // Print inventory
             {
                 //TODO: call AVLTree printInventory();
-
 
                 break;
             }
@@ -220,51 +265,6 @@ void Business::loadCommands(std::ifstream &comFile)
         }
 
     }
-}
-
-
-
-
-void Business::runCommands()
-{
-    //pop from comQueue and run each through switch statement
-
-    /*
-
-
-
-
-
-     case 'R'
-
-        if customer exists
-            if customer has item?
-              add return to customer history vector
-              increase AVL stock by 1
-
-          else
-              display error message
-
-
-     case 'H'
-
-        if customer exists    <--- displays its own error message getCustomer()
-            display history
-
-
-
-
-
-     case 'I'
-        display current inventory
-
-
-
-     case 'default'
-
-        display error message: transaction command does not exist
-
-*/
 }
 
 void Business::displayBusiness()
