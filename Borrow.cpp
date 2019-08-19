@@ -68,10 +68,13 @@ bool Borrow::SetRental(string &newMediaType, Movie *newItemType, Customer *theCu
 
     if (mediaType != "")
     {
-        //TODO: Call to decrease stock in AVL class
+        return true;
+    }
+    else
+    {
+        return false;
     }
 
-    return true;
 }
 
 
