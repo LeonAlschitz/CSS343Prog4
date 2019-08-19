@@ -9,9 +9,7 @@
 
 class Drama : public Movie{
 
-
 private:
-
 public:
     Drama(){updateMovieType('D');};
     Drama(string dataToParse)
@@ -49,16 +47,11 @@ public:
     }
     ~Drama(){};
 
-
     string printMovieDetails()
     {
         string movieType(1, getMovieType());
         return movieType + ", " + to_string(getStock()) + ", " + getFullDirectorName() + ", " + getMovieTitle() + ", " + to_string(getYearMade()) + "\n";
     }
-
-
-
-
 };
 
 

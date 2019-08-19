@@ -31,7 +31,10 @@ class AVLTree
 	//Description: This destroys the AVLTree
 	//Preconditions: This Object is initialized
 	//Postconditions: This Object is un-initialized
-	~AVLTree(){};
+	~AVLTree()
+	{
+		clearTree();
+	};
 
 	//Description: This makes the NodeData object a child of a different node
 	//Preconditions: This Object is initialized
@@ -154,13 +157,7 @@ class AVLTree
 
 		checkBalance(head);
 
-		if(unbalancedNode != NULL)
-		{
-			//cout << "the unbalanced node is: ";
-			//cout << *unbalancedNode;
-
-			rebalanceTree();
-		}
+		if(unbalancedNode != NULL)rebalanceTree();
 		unbalancedNode = NULL;
 
 	}
@@ -189,7 +186,7 @@ class AVLTree
 	void rebalanceTree()
 	{
 		getChildren(unbalancedNode);
-
+		/*
 		if(parent != NULL)
 		{
 			cout << "The parent of the unbalanced Node is: ";
@@ -203,7 +200,7 @@ class AVLTree
 		cout << *childOne;
 		cout << "Second child is:                      ";
 		cout << *childTwo;
-		cout << endl;
+		cout << endl;*/
 
 		//left is false, right is True
 		bool leftRightOne;
@@ -255,7 +252,7 @@ class AVLTree
 
 	void leftLeft(NodeData *leftChildOne, NodeData *leftChildTwo)
 	{
-		cout << "left left" << endl;
+		//cout << "left left" << endl;
 		if(parent == NULL)
 		{
 			unbalancedNode->setLeft(leftChildOne->getRight());
@@ -280,7 +277,7 @@ class AVLTree
 
 	void rightRight(NodeData *rightChildOne, NodeData *rightChildTwo)
 	{
-		cout << "right right" << endl;
+		//cout << "right right" << endl;
 		if(parent == NULL)
 		{
 			unbalancedNode->setRight(rightChildOne->getLeft());
@@ -304,8 +301,7 @@ class AVLTree
 
 	void rightLeft(NodeData *rightChildOne, NodeData *leftChildTwo)
 	{
-
-		cout << "right left" << endl;
+		//cout << "right left" << endl;
 		if(parent == NULL)
 		{
 			rightChildOne->setRight(leftChildTwo->getLeft());
@@ -333,7 +329,7 @@ class AVLTree
 
 	void leftRight(NodeData *leftChildOne, NodeData *rightChildTwo)
 	{
-		cout << "left right" << endl;
+		//cout << "left right" << endl;
 		if(parent == NULL)
 		{
 			leftChildOne->setRight(rightChildTwo->getLeft());
@@ -372,7 +368,26 @@ class AVLTree
 	//Description: This prints out all of the Nodes from a given Genre
 	//Preconditions: The char is of a valid Genre type
 	//Postconditions: The Genre's is printed out inorder
-	void printGenre(char);
+	void printGenre(char genre)
+	{
+		if(head == NULL)
+		{
+			cout << "There is nothing in the inventory." << endl;
+			return;
+		}
+		printGenre(genre, head);
+		cout << endl;
+	}
+
+	void printGenre(char genre, NodeData* curr)
+	{
+		if(curr->getLeft() != NULL) printGenre(genre, curr->getLeft());
+		if(genre == curr->getMovie()->getMovieType())
+		{
+			cout << *curr;
+		}
+		if(curr->getRight() != NULL) printGenre(genre, curr->getRight());
+	}
 
 	//Description: This prints out all of the genres inventory inorder, because it is all sorted inorder
 	//Preconditions: There is at least one NodeData in the AVLTree
@@ -384,14 +399,19 @@ class AVLTree
 			cout << "you have no data in your inventory" << endl;
 			return;
 		}
+		cout << "-----------------------------------" << endl;
+		cout << "Printing out the full inventory...." << endl;
 		printInventory(head, "root ");
+		cout << "-----------------------------------" << endl;
 	}
 
 	void printInventory(NodeData* curr, string path)
 	{
 		if(curr->getLeft() != NULL)printInventory(curr->getLeft(), path + "0");
-		cout << *curr;
+		cout << "-------" << endl;
 		cout << "The path: " + path << endl;
+		cout << *curr;
+
 
 		if(curr->getRight() != NULL)printInventory(curr->getRight(), path + "1");
 	}

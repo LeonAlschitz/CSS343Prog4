@@ -63,36 +63,29 @@ public:
         {
             if(getMovieTitle() < otherClassic.getMovieTitle())
             {
-                if(getMajorActorAndDate() < otherClassic.getMajorActorAndDate())
-                {
-                    return true;
-                }
+                if(getMajorActorAndDate() < otherClassic.getMajorActorAndDate())return true;
             }
         }
         return false;
     }
 
-    bool checkEquality(Classic *otherClassic) const
+    bool checkEquality(const Classic *otherClassic) const
     {
         if(getFullDirectorName() == otherClassic->getFullDirectorName())
         {
             if(getMovieTitle() == otherClassic->getMovieTitle())
             {
-                if(getMajorActorAndDate() == otherClassic->getMajorActorAndDate())
-                {
-                    return true;
-                }
+                if(getMajorActorAndDate() == otherClassic->getMajorActorAndDate())return true;
             }
         }
         return false;
     }
 
-    virtual bool operator==(Movie *aNode) const
+    virtual bool operator==(const Movie &aNode) const
     {
-        return checkEquality(dynamic_cast<Classic*>(aNode));
+        const Classic *derived = dynamic_cast<const Classic*>(&aNode);
+        return checkEquality(derived);
     }
-
-
 };
 
 

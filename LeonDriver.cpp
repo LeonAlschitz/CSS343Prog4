@@ -13,13 +13,15 @@ int main()
 
     aTree->insertNode("F, 10, Nora Ephron, You've Got Mail, 1998");
     aTree->insertNode("F, 10, Nora Ephron, You've Got Mail, 1997");
+    aTree->insertNode("F, 10, Nora Ephron, You've Got Mail, 1997");
 
     aTree->insertNode("D, 15, Bora Ephron, Missing Mail, 2001");
 
 
+    aTree->printGenre('D');
     aTree->printInventory();
 
-   /* NodeData *testNode = new NodeData("10, Nora Ephron, You've Got Mail, 1998", 'F');
+    NodeData *testNode = new NodeData("10, Nora Ephron, You've Got Mail, 1998", 'F');
     cout << *testNode;
     NodeData *testNode2 = new NodeData("15, Bora Ephron, Missing Mail, 2002", 'D');
     cout << *testNode2;
@@ -33,7 +35,7 @@ int main()
     if(*testNode4 == *testNode2)
     {
         cout << "passed";
-    }*/
+    }
 
 
     return 0;
