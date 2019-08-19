@@ -86,7 +86,6 @@ public:
     void printMenu();
 
     AVLTree* getTree(){return tree;}
-
 protected:
 
 private:

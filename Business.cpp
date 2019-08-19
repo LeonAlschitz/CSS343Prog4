@@ -8,13 +8,18 @@
 //
 // Description: a Business Class header.
 // -----------------------------------------------------------------------------
-
+#include <iostream>
+#include <fstream>
+#include <queue>
 #include "Business.h"
 #include "Borrow.h"
 #include "Return.h"
 #include "History.h"
+#include "CustomerHash.h"
+#include "Movie.h"
+#include "AVLTree.h"
+#include "Transaction.h"
 
-using namespace std;
 
 Business::Business()
 {
@@ -81,7 +86,6 @@ void Business::printMenu()
     cout << "custom, to enter custom inputs" << endl;
 }
 
-
 void Business::loadCustomers(std::ifstream &custFile)
 {
     custTable.loadCustomers(custFile);
@@ -109,6 +113,7 @@ void Business::loadCommands(std::ifstream &comFile)
     string newMedia;
     Movie* newMovie = nullptr;
     Customer* newCustomer;
+    int customerID;
 
     while (!comFile.eof())
     {
@@ -118,14 +123,45 @@ void Business::loadCommands(std::ifstream &comFile)
         {
             case 'B': // Borrow Movie
             {
-                //TODO: error checking
+             //   TODO: error checking
+
+
+                comFile.get();
+
+                comFile >> customerID;
+                newCustomer = custTable.getCustomer(customerID);
+
+                if(nullptr == newCustomer) //no customer, prints its own error
+                {
+                    break;
+                }
+
+                /*
+
+                if item is in stock
+                     add borrow to customer vector
+                    decrease stock AVL by 1
+                else
+                    find/offer alternate if in stock
+
+                 if movie is not in stock
+                      if alternate is in stock
+                          offer different movie
+                      else
+                          error message
+                 else
+                    run code below
+                */
+
+
+                //TODO: SET newMovie to AVLcomfile.get()
 
                 Borrow* newBorrow = new Borrow;
-                newBorrow->SetRental(newMedia, newMovie, newCustomer);
 
-                comQueue.push(*newBorrow);
-
-                // TODO: newMovie->updateStock(1);
+                if(newBorrow->SetRental(newMedia, newMovie, newCustomer))
+                {
+                    // TODO: newMovie->updateStock(1);
+                }
 
                 break;
             }
@@ -149,9 +185,16 @@ void Business::loadCommands(std::ifstream &comFile)
                 //TODO: error checking
 
                 History *newHistory = new History;
-                newHistory->SetRental(newMedia, newMovie, newCustomer);
 
-                comQueue.push(*newHistory);
+                comFile >> customerID;
+                newCustomer = custTable.getCustomer(customerID);
+
+                if(nullptr == newCustomer) //no customer, prints its own error
+                {
+                    break;
+                }
+
+                newHistory->SetRental(newMedia, newMovie, newCustomer);
 
                 break;
             }
@@ -187,15 +230,7 @@ void Business::runCommands()
     //pop from comQueue and run each through switch statement
 
     /*
-    switch statement
-     case 'B'
 
-          if customer exists           <--- displays its own error message getCustomer()
-                if item is in stock
-                     add borrow to customer vector
-                    decrease stock AVL by 1
-                else
-                    find/offer alternate if in stock
 
 
 
