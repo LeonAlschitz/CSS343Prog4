@@ -1,3 +1,20 @@
+// -------------------------------- Customer.h ---------------------------------
+//
+// Author Name: Tim Lawton
+//
+// Creation Date: 07/16/2019
+//
+// Date of Last Modification: 8/19/2019
+//
+// Description: a Customer Class header.
+// This file is the interface for the Customer class. Each object of this class
+// represents a current customer of the business. The objects are hashed into the
+// hash table. Each object stores it's own transaction history in a vector, which
+// is updated as transactions are processed.
+//
+// Customers are indexed in a hash table in the class CustomerHash
+// -----------------------------------------------------------------------------
+
 
 #ifndef IMPLEMENTATION_CUSTOMER_H
 #define IMPLEMENTATION_CUSTOMER_H
@@ -10,52 +27,69 @@
 #include "Transaction.h"
 using namespace std;
 
-/*
-PURPOSE:
-This file is the interface for the Customer class. Each object of this class
-represents a current customer of the business. The objects are hashed into the
-hash table. Each object stores it's own transaction history in a vector, which
-is updated as transactions are processed.
-*/
+class Transaction; //forward reference
+
 
 class Customer
 {
 public:
 
-	//default constructor.
+	// ------------------------------Customer-------------------------------
+	// Description: this a default constructor for a Customer
+	// preconditions: *this is a totally un-initialized Customer
+	// postconditions: The fields of *this will be initialized, and the
+	//                 Customer will contain default values for its data
+	// ---------------------------------------------------------------------
 	Customer();
 
-	//parameterized constructor.
-	//sstream param is parsed to initialize instance data fields.
-	//preconditions: a string with valid data format is passed in.
-	//postconditions: a new instance of customer is created and returned.
-	Customer(stringstream& inFile);
-
-	//destructor.
+	// -----------------~Customer()------------------
+	// Description: this is the deconstructor.
+	// preconditions: None.
+	// postconditions: a Customer deconstructed.
+	// --------------------------------------------------
 	~Customer();
 
-	//returns calling objects customerID.
+	// ------------------------------setCustomerInfo-------------------------------
+	// Description: this a setter for a Customer
+	//preconditions: a string with valid data format is passed in.
+	//postconditions: a new instance of customer is created and returned.
+	// ---------------------------------------------------------------------
+	void setCustomerInfo(istream& inFile);
+
+	// ------------------------------getID-------------------------------
+	// Description: returns calling object's customerID.
 	//preconditions: must be called on a valid instance of customer.
 	//postconditions: instance values remain unchanged.
+	// ---------------------------------------------------------------------
 	int getID() const;
 
-	//returns calling objects firstName.
+	// ------------------------------getFirstName-------------------------------
+	// Description: returns calling objects firstName.
 	//preconditions: must be called on a valid instance of customer.
 	//postconditions: instance values remain unchanged.
+	// ---------------------------------------------------------------------
 	string getFirstName() const;
 
-	//returns calling objects lastName.
+	// ------------------------------getLastName-------------------------------
+	// Description: returns calling objects lastName.
 	//preconditions: must be called on a valid instance of customer.
 	//postconditions: instance values remain unchanged.
+	// ---------------------------------------------------------------------
 	string getLastName() const;
 
-	//prints the customers transaction history.
+	// ------------------------------printHistory-------------------------------
+	// Description: prints the customers transaction history.
+	//preconditions: None
+	//postconditions: None
+	// ---------------------------------------------------------------------
 	void printHistory() const;
 
-	//stores the passed Transaction param in this objects history
+	// ------------------------------StoreTransaction-------------------------------
+	// Description: stores the passed Transaction param in this objects history
 	//by inserting it into the vector
 	//preconditions: proper param passed
 	//postconditions: the objects tranHistory contains the param Transaction
+	// ---------------------------------------------------------------------
 	void storeTransaction(Transaction& trans); // const);
 
 private:

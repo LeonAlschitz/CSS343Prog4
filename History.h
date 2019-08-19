@@ -1,20 +1,26 @@
+// -------------------------------- History.h ---------------------------------
+//
+// Author Name: Tim Lawton
+//
+// Creation Date: 07/16/2019
+//
+// Date of Last Modification: 8/19/2019
+//
+// Description: a History Class header.
+// History is a derived class from the Transaction class
+//
+// when History class is called. the customer history vector is printed
+// -----------------------------------------------------------------------------
+
+
 #ifndef TESTDESIGN_HISTORY_H
 #define TESTDESIGN_HISTORY_H
 
 #include <iostream>
 #include "Transaction.h"
-//#include "Rentable.h" //TODO yes
-
-class Customer;//forward reference
+//#include "Movie.h" //TODO yes
 
 using namespace std;
-
-// Author Name: Design Group 8
-
-// Description: a History Class header.
-// History is a derived class from the Transaction class
-//
-// calls Customer class to print out history vector
 
 class Customer; //forward reference
 
@@ -25,31 +31,36 @@ public:
 
     friend class Customer;
 
-    //constructors
+    // -----------------History()------------------
+    // Description: this is the default constructor.
+    // preconditions: None.
+    // postconditions: a History copy values are constructed
+    // --------------------------------------------------
     History();
-    History(const History& newHistory); //overloaded constructor
 
-    //deconstructor
+    // -------------History()--------
+    // Description: this is the overloaded constructor.
+    // preconditions: History to set values to.
+    // postconditions: a History is constructed.
+    // ------------------------------------------------
+    History(const History& newHistory);
+
+    // -----------------~History------------------
+    // Description: this is the deconstructor.
+    // preconditions: None.
+    // postconditions: a History is deconstructed
+    // --------------------------------------------------
     virtual ~History() override;
 
     //setter
 
-    // -SetRental(string actionType, Customer *customerInfo, Item *itemType, string dueDate)-
-    // Description: changes Transaction private variables.
-    // preconditions: actionType, mediaType, *customerInfo, *itemType, dueDate);
+    // -SetRental(string actionType, Customer *customerInfo, Item *itemType)-
+    // Description: displays customer class history. // setter name for overridden commands
+    // preconditions: actionType, mediaType, *customerInfo, *itemType);
     // postconditions: Returns boolean result for changes
+    // calls to customer class to print out history vector
     // --------------------------------------------------
-    virtual bool SetRental(string newMediaType, Rentable *newItemType, Customer * theCustomer, string newDueDatee);
-//TODO calls customer history display
-
-    // -----------------displayHistory()------------------
-    // Description: displays customer class history.
-    // preconditions: None.
-    // postconditions: customer history is displayed.
-    // --------------------------------------------------
-   // void displayHistory(); //call to Customer class to display history vector
-
-    //TODO virtual Transaction* create(); return new History();
+    virtual bool SetRental(string &newMediaType, Movie *newItemType, Customer * theCustomer);
 };
 
 

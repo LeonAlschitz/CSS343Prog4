@@ -1,0 +1,74 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Borrow.h
+iostream
+-
+Transaction.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Transaction.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Business.cpp
+Business.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Business.h
+Borrow.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Borrow.h
+Return.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Return.h
+History.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/History.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Business.h
+iostream
+-
+fstream
+-
+queue
+-
+CustomerHash.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/CustomerHash.h
+Transaction.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Transaction.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Customer.h
+string
+-
+iostream
+-
+vector
+-
+sstream
+-
+Transaction.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Transaction.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/CustomerHash.h
+iostream
+-
+fstream
+-
+Customer.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Customer.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/History.h
+iostream
+-
+Transaction.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Transaction.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Return.h
+iostream
+-
+Transaction.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Transaction.h
+
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Transaction.h
+Customer.h
+/cygdrive/c/Users/tglaw/OneDrive/Documents/UW BOTHELL/SUMMER 2019/CSS 343/Assignment 4/implementation/Lab 4/Customer.h
+iostream
+-
+
