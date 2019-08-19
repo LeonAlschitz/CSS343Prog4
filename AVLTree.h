@@ -13,6 +13,14 @@ class AVLTree
 	NodeData* head = NULL;
 	vector<char> validGenres = {'F', 'C', 'D'};
 
+	NodeData* parent = NULL;
+	NodeData* unbalancedNode = NULL;
+
+	NodeData* childOne = NULL;
+	NodeData* childTwo = NULL;
+	int childOneValue = 0;
+
+
 	public:
 
 	//Description: This creates a new AVLTree
@@ -128,18 +136,227 @@ class AVLTree
 		}
 
 		insertNode( newNode, head);
+
+        checkBalance();
 	}
 
 
 	//Description: Checks the balance of the AVLTree, and calls rebalanceTree if nessecary
 	//Preconditions: A newNode has just been inserted
 	//Postconditions: The AVLTree is balanced
-	bool checkBalance();
+	void checkBalance()
+	{
+		if(head == NULL)
+		{
+			cout << "There isn't anything to balance" << endl;
+			return;
+		}
+
+		checkBalance(head);
+
+		if(unbalancedNode != NULL)
+		{
+			//cout << "the unbalanced node is: ";
+			//cout << *unbalancedNode;
+
+			rebalanceTree();
+		}
+		unbalancedNode = NULL;
+
+	}
+
+	int checkBalance(NodeData *curr)
+	{
+		int leftValue = 0;
+		int rightValue = 0;
+
+		if(unbalancedNode != NULL && parent == NULL) parent = curr;
+		if(curr->getLeft() != NULL)leftValue += checkBalance(curr->getLeft());
+		if(unbalancedNode != NULL && parent == NULL) parent = curr;
+		if(curr->getRight() != NULL)rightValue += checkBalance(curr->getRight());
+
+		if(unbalancedNode != NULL && parent == NULL) parent = curr;
+		if(max(leftValue, rightValue) - min(leftValue, rightValue) >  1 && unbalancedNode == NULL)unbalancedNode = curr;
+
+
+
+		return max(leftValue, rightValue) + 1;
+	}
 
 	//Description: Finds the highest unbalanced node, then balances the AVLtree
 	//Preconditions: The AVLTree isn't balanced
 	//Postconditions: The AVLTree is balanced
-	void rebalanceTree();
+	void rebalanceTree()
+	{
+		getChildren(unbalancedNode);
+
+		if(parent != NULL)
+		{
+			cout << "The parent of the unbalanced Node is: ";
+			cout << *parent;
+		}
+
+		cout << "The unbalanced Node is:               ";
+		cout << *unbalancedNode;
+
+		cout << "First child is:                       ";
+		cout << *childOne;
+		cout << "Second child is:                      ";
+		cout << *childTwo;
+		cout << endl;
+
+		//left is false, right is True
+		bool leftRightOne;
+		bool leftRightTwo;
+
+		if(*(unbalancedNode->getLeft()) == *childOne) leftRightOne = false;
+		else leftRightOne = true;
+
+		if(*(childOne->getLeft()) == *childTwo) leftRightTwo = false;
+		else leftRightTwo = true;
+
+		if(!leftRightOne && !leftRightTwo)leftLeft(childOne, childTwo);
+		else if(leftRightOne && leftRightTwo) rightRight(childOne, childTwo);
+		else if(!leftRightOne && leftRightTwo) leftRight(childOne, childTwo);
+		else if(leftRightOne && !leftRightTwo) rightLeft(childOne, childTwo);
+
+
+
+		parent = NULL;
+		unbalancedNode = NULL;
+		childOne = NULL;
+		childTwo = NULL;
+		childOneValue = 0;
+	}
+
+	int getChildren(NodeData *curr)
+	{
+		int leftValue = 0;
+		int rightValue = 0;
+
+		if(curr->getLeft() != NULL)leftValue += getChildren(curr->getLeft());
+		if(curr->getRight() != NULL)rightValue += getChildren(curr->getRight());
+
+
+		if(childOne == NULL) childTwo = curr;
+
+		if(max(leftValue, rightValue) >  childOneValue)
+		{
+			if(childOne != NULL)childTwo = childOne;
+
+			if(leftValue > rightValue)childOne = curr->getLeft();
+			else childOne = curr->getRight();
+
+			childOneValue = max(leftValue, rightValue);
+		}
+
+		return max(leftValue, rightValue) + 1;
+	}
+
+	void leftLeft(NodeData *leftChildOne, NodeData *leftChildTwo)
+	{
+		cout << "left left" << endl;
+		if(parent == NULL)
+		{
+			unbalancedNode->setLeft(leftChildOne->getRight());
+			leftChildOne->setRight(unbalancedNode);
+			head = leftChildOne;
+		}
+		else
+		{
+			//is the unbalanced the left or right child of the parent
+			//left is false, right is true
+			bool leftOrRight;
+			if(parent->getLeft() == unbalancedNode) leftOrRight = false;
+			else leftOrRight = true;
+
+			unbalancedNode->setLeft(leftChildOne->getRight());
+			leftChildOne->setRight(unbalancedNode);
+
+			if(!leftOrRight) parent->setLeft(leftChildOne);
+			else parent->setRight(leftChildOne);
+		}
+	}
+
+	void rightRight(NodeData *rightChildOne, NodeData *rightChildTwo)
+	{
+		cout << "right right" << endl;
+		if(parent == NULL)
+		{
+			unbalancedNode->setRight(rightChildOne->getLeft());
+			rightChildOne->setLeft(unbalancedNode);
+			head = rightChildOne;
+		}
+		else
+		{
+			//is the unbalanced the left or right child of the parent
+			//left is false, right is true
+			bool leftOrRight;
+			if(parent->getLeft() == unbalancedNode) leftOrRight = false;
+			else leftOrRight = true;
+
+			unbalancedNode->setRight(rightChildOne->getLeft());
+			rightChildOne->setLeft(unbalancedNode);
+			if(!leftOrRight) parent->setLeft(rightChildOne);
+			else parent->setRight(rightChildOne);
+		}
+	}
+
+	void rightLeft(NodeData *rightChildOne, NodeData *leftChildTwo)
+	{
+
+		cout << "right left" << endl;
+		if(parent == NULL)
+		{
+			rightChildOne->setRight(leftChildTwo->getLeft());
+			unbalancedNode->setLeft((leftChildTwo));
+			leftChildTwo->setLeft(rightChildOne);
+		}
+		else
+		{
+			//is the unbalanced the left or right child of the parent
+			//left is false, right is true
+			bool leftOrRight;
+			if(parent->getLeft() == unbalancedNode) leftOrRight = false;
+			else leftOrRight = true;
+
+			rightChildOne->setRight(leftChildTwo->getLeft());
+			unbalancedNode->setLeft((leftChildTwo));
+			leftChildTwo->setLeft(rightChildOne);
+
+			if(!leftOrRight) parent->setLeft(childOne);
+			else parent->setRight(childOne);
+		}
+
+		rightRight(rightChildOne, leftChildTwo);
+	}
+
+	void leftRight(NodeData *leftChildOne, NodeData *rightChildTwo)
+	{
+		cout << "left right" << endl;
+		if(parent == NULL)
+		{
+			leftChildOne->setRight(rightChildTwo->getLeft());
+			unbalancedNode->setLeft((rightChildTwo));
+			rightChildTwo->setLeft(leftChildOne);
+		}
+		else
+		{
+			//is the unbalanced the left or right child of the parent
+			//left is false, right is true
+			bool leftOrRight;
+			if(parent->getLeft() == unbalancedNode) leftOrRight = false;
+			else leftOrRight = true;
+
+			leftChildOne->setRight(rightChildTwo->getLeft());
+			unbalancedNode->setLeft((rightChildTwo));
+			rightChildTwo->setLeft(leftChildOne);
+
+			if(!leftOrRight) parent->setLeft(childOne);
+			else parent->setRight(childOne);
+		}
+		leftLeft(leftChildOne, rightChildTwo);
+	}
 
 	//Description: Rempoves all of the nodes from the AVLTree
 	//Preconditions: There is at least one node, in the AVLTree.
@@ -162,23 +379,21 @@ class AVLTree
 	//Postconditions: The whole inventory is print in order of genre, and is sorted according to each genres internal order.
 	void printInventory()
 	{
-
-		printInventory(head);
+		if(head == NULL)
+		{
+			cout << "you have no data in your inventory" << endl;
+			return;
+		}
+		printInventory(head, "root ");
 	}
 
-	void printInventory(NodeData* curr)
+	void printInventory(NodeData* curr, string path)
 	{
-		if(curr->getLeft() != NULL)
-		{
-			printInventory(curr->getLeft());
-		}
-
+		if(curr->getLeft() != NULL)printInventory(curr->getLeft(), path + "0");
 		cout << *curr;
+		cout << "The path: " + path << endl;
 
-		if(curr->getRight() != NULL)
-		{
-			printInventory(curr->getRight());
-		}
+		if(curr->getRight() != NULL)printInventory(curr->getRight(), path + "1");
 	}
 
 };

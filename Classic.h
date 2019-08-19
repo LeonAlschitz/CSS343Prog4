@@ -7,8 +7,7 @@
 
 #include "Movie.h"
 
-class Classic : public Movie
-        {
+class Classic : public Movie{
 
 
 private:
@@ -73,19 +72,24 @@ public:
         return false;
     }
 
-    virtual bool operator==(const Classic &otherClassic) const
+    bool checkEquality(Classic *otherClassic) const
     {
-        if(getFullDirectorName() == otherClassic.getFullDirectorName())
+        if(getFullDirectorName() == otherClassic->getFullDirectorName())
         {
-            if(getMovieTitle() == otherClassic.getMovieTitle())
+            if(getMovieTitle() == otherClassic->getMovieTitle())
             {
-                if(getMajorActorAndDate() == otherClassic.getMajorActorAndDate())
+                if(getMajorActorAndDate() == otherClassic->getMajorActorAndDate())
                 {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    virtual bool operator==(Movie *aNode) const
+    {
+        return checkEquality(dynamic_cast<Classic*>(aNode));
     }
 
 

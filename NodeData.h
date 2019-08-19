@@ -25,10 +25,7 @@ class NodeData {
 	//Description: This creates a new NodeData object
 	//Preconditions: This object is un-initialized
 	//Postconditions: This Object is initialized
-	NodeData()
-	{
-		aMovie = new Movie();
-	}
+	NodeData(){}
 
 	//Description: This creates a new NodeData object using a string
 	//Preconditions: This object is un-initialized
@@ -61,7 +58,7 @@ class NodeData {
 	//Description: This NodeData object copies the Movie data from another NodeData object
 	//Preconditions: This object is initialized
 	//Postconditions: This object made a deep copy of the passed in NodeData object
-	NodeData& operator=(const NodeData &);
+	//NodeData& operator=(const NodeData &);
 
 	//Description: This creates a new Movie Object using the string, and sets it to the movieData
 	//Preconditions: This Object is initialized
@@ -83,7 +80,7 @@ class NodeData {
 
 	bool operator==(const NodeData &otherNode) const
 	{
-		if(*aMovie == *(otherNode.aMovie))
+		if(aMovie == (otherNode.aMovie))
 		{
 			return true;
 		}

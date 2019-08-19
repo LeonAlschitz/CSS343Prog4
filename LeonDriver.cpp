@@ -8,8 +8,13 @@ int main()
     AVLTree *aTree = new AVLTree();
 
     aTree->insertNode("C, 20, Lora Ephron, Found the Mail, The Actor 2004");
+    aTree->insertNode("C, 20, Lora Ephron, Found the Mail, The Actor 2003");
     aTree->insertNode("D, 15, Bora Ephron, Missing Mail, 2002");
+
     aTree->insertNode("F, 10, Nora Ephron, You've Got Mail, 1998");
+    aTree->insertNode("F, 10, Nora Ephron, You've Got Mail, 1997");
+
+    aTree->insertNode("D, 15, Bora Ephron, Missing Mail, 2001");
 
 
     aTree->printInventory();

@@ -49,13 +49,13 @@ public:
         return false;
     }
 
-    virtual bool operator==(const Movie &otherMovie) const
+    virtual bool operator==(Movie *otherMovie) const
     {
-        if(getFullDirectorName() == otherMovie.getFullDirectorName())
+        if(getFullDirectorName() == otherMovie->getFullDirectorName())
         {
-            if(getMovieTitle() == otherMovie.getMovieTitle())
+            if(getMovieTitle() == otherMovie->getMovieTitle())
             {
-                if(getYearMade() == otherMovie.getYearMade())
+                if(getYearMade() == otherMovie->getYearMade())
                 {
                     return true;
                 }
