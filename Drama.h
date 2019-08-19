@@ -1,21 +1,20 @@
 //
-// Created by Leon on 8/11/2019.
+// Created by Leon on 8/15/2019.
 //
 
-#ifndef COMEDY_H
-#define COMEDY_H
+#ifndef DRAMA_H
+#define DRAMA_H
 
 #include "Movie.h"
 
-class Comedy : public Movie
-{
-private:
+class Drama : public Movie{
 
+private:
 public:
-    Comedy(){updateMovieType('F');};
-    Comedy(string dataToParse)
+    Drama(){updateMovieType('D');};
+    Drama(string dataToParse)
     {
-        updateMovieType('F');
+        updateMovieType('D');
 
         string temp = "";
         int curr = 0;
@@ -46,15 +45,13 @@ public:
             curr++;
         }
     }
-    ~Comedy(){};
+    ~Drama(){};
 
     string printMovieDetails()
     {
         string movieType(1, getMovieType());
         return movieType + ", " + to_string(getStock()) + ", " + getFullDirectorName() + ", " + getMovieTitle() + ", " + to_string(getYearMade()) + "\n";
     }
-
-
 };
 
 
