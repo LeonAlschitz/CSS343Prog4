@@ -14,16 +14,73 @@
 #include "Return.h"
 #include "History.h"
 
+using namespace std;
 
 Business::Business()
 {
-
+    tree = new AVLTree();
 }
 
 Business::~Business()
 {
-
+    delete(tree);
 }
+
+int main()
+{
+    Business *movieStore = new Business();
+    cout << "Welcome user to Tim and Leon Program 4!" << endl;
+    bool exitUserMenu = false;
+    string userInput = "";
+
+    movieStore->printMenu();
+    while(!exitUserMenu)
+    {
+        userInput = "";
+        cout << "----------------------------" << endl;
+        cout << "Please enter a new command: ";
+        getline(cin, userInput);
+
+        if(userInput == "quit")
+        {
+            exitUserMenu = true;
+        }
+        else if(userInput == "menu")movieStore->printMenu();
+        else if(userInput == "default")
+        {
+            ifstream movieFile("C:\\Users\\Leon\\Desktop\\CSS343Prog4\\data4Movies.txt");
+            movieStore->loadMovies(movieFile);
+            movieFile.close();
+            movieStore->getTree()->printInventory();
+        }
+        else if(userInput == "custom")
+        {
+
+        }
+        else cout << "That input was invalid." << endl;
+
+
+    }
+
+
+
+
+
+    cout << "Goodbye! Thank you for running Tim and Leon's Program 4!" << endl;
+    cout << "----------------------------" << endl;
+
+    return 0;
+}
+
+void Business::printMenu()
+{
+    cout << "List of valid commands:" << endl;
+    cout << "quit, to quit the program" << endl;
+    cout << "menu, to re-print the menu" << endl;
+    cout << "default, to take as input the starting homework txt's: data4commands.txt, data4customers.txt, data4movies.txt" << endl;
+    cout << "custom, to enter custom inputs" << endl;
+}
+
 
 void Business::loadCustomers(std::ifstream &custFile)
 {
@@ -32,7 +89,15 @@ void Business::loadCustomers(std::ifstream &custFile)
 
 void Business::loadMovies(std::ifstream &movieFile)
 {
-    //call load movies in movie class
+    string input = "";
+    while(!movieFile.eof())
+    {
+        getline(movieFile, input);
+        if(input.length() < 2)return;
+
+        tree->insertNode(input);
+        input = "";
+    }
 }
 
 //***********************************************************************
