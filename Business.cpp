@@ -122,6 +122,7 @@ void Business::loadCommands(std::ifstream &comFile)
     string newMedia;
     string movieData;// for searching the AVL tree
     Movie* newMovie = nullptr;
+    NodeData movieNode;
     Customer* newCustomer;
     int customerID;
 
@@ -168,11 +169,13 @@ void Business::loadCommands(std::ifstream &comFile)
                 //possibly have a findMovie() method to search in your AVL tree
                 //TODO: SET newMovie to AVLcomfile.get()     see bellow
 
+
+
                 getline(comFile, movieData); ////TODO verify no errors in second run of Borrow
-                tree->getMovie(movieData);
+                movieNode = *tree->getMovie(movieData);
 
 
-
+                ///
 
 
                 if(newMovie->getStock() < 1) //TODO ERROR: SEGSEGV (segmentation fault) without newMovie assignment
