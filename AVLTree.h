@@ -124,9 +124,10 @@ class AVLTree
             }
         }
 
+
         if (!valid)
         {
-            cout << "The item is not of a valid type" << endl;
+            cout << "The movie genre isn't recognized, input ignored" << endl;
             return;
         }
         NodeData* newNode = new NodeData( newInput.substr(3, newInput.length() - 3) , temp);
@@ -155,10 +156,11 @@ class AVLTree
 			return;
 		}
 
-		checkBalance(head);
 
+		checkBalance(head);
 		if(unbalancedNode != NULL)rebalanceTree();
 		unbalancedNode = NULL;
+
 
 	}
 
@@ -186,8 +188,8 @@ class AVLTree
 	void rebalanceTree()
 	{
 		getChildren(unbalancedNode);
-		/*
-		if(parent != NULL)
+
+		/*if(parent != NULL)
 		{
 			cout << "The parent of the unbalanced Node is: ";
 			cout << *parent;
@@ -206,10 +208,18 @@ class AVLTree
 		bool leftRightOne;
 		bool leftRightTwo;
 
-		if(*(unbalancedNode->getLeft()) == *childOne) leftRightOne = false;
+		if((unbalancedNode->getLeft()) != NULL)
+		{
+			if(*(unbalancedNode->getLeft()) == *childOne) leftRightOne = false;
+			else leftRightOne = true;
+		}
 		else leftRightOne = true;
 
-		if(*(childOne->getLeft()) == *childTwo) leftRightTwo = false;
+		if(childOne->getLeft() != NULL)
+		{
+			if(*(childOne->getLeft()) == *childTwo) leftRightTwo = false;
+			else leftRightTwo = true;
+		}
 		else leftRightTwo = true;
 
 		if(!leftRightOne && !leftRightTwo)leftLeft(childOne, childTwo);
@@ -304,9 +314,9 @@ class AVLTree
 		//cout << "right left" << endl;
 		if(parent == NULL)
 		{
-			rightChildOne->setRight(leftChildTwo->getLeft());
-			unbalancedNode->setLeft((leftChildTwo));
-			leftChildTwo->setLeft(rightChildOne);
+			rightChildOne->setLeft(leftChildTwo->getRight());
+			unbalancedNode->setRight((leftChildTwo));
+			leftChildTwo->setRight(rightChildOne);
 		}
 		else
 		{
@@ -316,9 +326,9 @@ class AVLTree
 			if(parent->getLeft() == unbalancedNode) leftOrRight = false;
 			else leftOrRight = true;
 
-			rightChildOne->setRight(leftChildTwo->getLeft());
-			unbalancedNode->setLeft((leftChildTwo));
-			leftChildTwo->setLeft(rightChildOne);
+			rightChildOne->setLeft(leftChildTwo->getRight());
+			unbalancedNode->setRight((leftChildTwo));
+			leftChildTwo->setRight(rightChildOne);
 
 			if(!leftOrRight) parent->setLeft(childOne);
 			else parent->setRight(childOne);
@@ -422,6 +432,33 @@ class AVLTree
 
 
 		if(curr->getRight() != NULL)printInventory(curr->getRight(), path + "1");
+	}
+
+	NodeData* getMovie(string theData)
+	{
+		string newData = theData.substr(3, theData.length() - 3);
+		char type = theData.at(0);
+		NodeData *newNode = new NodeData(newData, type);
+		return getMovie(head, newNode);
+	}
+
+	NodeData* getMovie(NodeData* curr, NodeData* toCompare)
+	{
+
+		if(*curr == *toCompare)return curr;
+
+		if(toCompare->getMovie()->getMovieType() == curr->getMovie()->getMovieType())
+		{
+			if(*toCompare < *curr && curr->getRight() != NULL) return getMovie( curr->getRight(), toCompare);
+			else if(curr->getLeft() != NULL) return getMovie( curr->getLeft(), toCompare);
+		}
+		else
+		{
+			if(toCompare->getMovie()->getMovieType() < curr->getMovie()->getMovieType() && curr->getRight() != NULL)return getMovie(curr->getRight(), toCompare);
+			else if (curr->getLeft() != NULL) return getMovie(curr->getLeft(), toCompare);
+		}
+		return NULL;
+
 	}
 
 };

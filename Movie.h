@@ -56,6 +56,8 @@ public:
         return false;
     }
 
+    bool check();
+
 private:
 
     char movieType;
